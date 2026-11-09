@@ -21,3 +21,17 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+
+# SSH private keys
+**/devops-portfolio-key
+**/id_rsa
+**/id_ed25519
+
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Terraform sensitive files
+*.tfvars
+*.tfvars.json
