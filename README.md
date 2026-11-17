@@ -91,31 +91,20 @@ Internet Gateway dihubungkan ke VPC dan Route Table dikonfigurasi menggunakan de
 Networking Verification
 ![alt text](screenshoot/vpc.webp)
 
-[Masukkan screenshot Public Subnet]
+ Public Subnet
 
 ![alt text](<screenshoot/publiccc sub.webp>)
 
-Press enter or click to view image in full size
+ Internet Gateway dan Route Table
+ ![alt text](igw.png)
 
-[Masukkan screenshot Internet Gateway dan Route Table]
-
-Press enter or click to view image in full size
-
-Press enter or click to view image in full size
-
-Press enter or click to view image in full size
-
-Press enter or click to view image in full size
+![alt text](<route table.png>)
 
 Step 4 — Konfigurasi EC2 dan Security Group
 Compute module digunakan untuk membangun EC2 Instance dan mengatur akses jaringan.
 
 Security Group mengizinkan koneksi SSH melalui TCP port 22 dari alamat IP tertentu.
 
-Download the Medium app
-Subscribe to Pro Writer Tools to remove upgrade prompts from your unlocked stories.
-
-Subscribe to Pro Writer Tools to remove upgrade prompts from your unlocked stories.
 
 Konfigurasi ini membatasi akses SSH agar tidak terbuka untuk seluruh alamat internet.
 
@@ -126,12 +115,9 @@ AMI: Ubuntu 22.04
 Root EBS: 8 GiB gp3
 EBS Encryption: Enabled
 SSH Authentication: ED25519 Key Pair
+
 Security Group Verification
-Press enter or click to view image in full size
-
-Press enter or click to view image in full size
-
-[Masukkan screenshot Security Group]
+![alt text](<securty group.png>)
 
 Step 5 — Terraform Validation dan Planning
 Sebelum deployment, konfigurasi diperiksa menggunakan Terraform.
@@ -150,10 +136,7 @@ Plan: 9 to add, 0 to change, 0 to destroy.
 Hasil tersebut menunjukkan bahwa Terraform merencanakan pembuatan sembilan resource AWS tanpa perubahan atau penghapusan resource yang sudah ada.
 
 [Masukkan screenshot terraform validate dan terraform plan]
-
-Press enter or click to view image in full size
-
-Press enter or click to view image in full size
+![alt text](<validate terraform.png>)
 
 Step 6 — Deployment Menggunakan Terraform Apply
 Setelah konfigurasi dan rencana deployment diperiksa, provisioning dilakukan menggunakan:
@@ -167,40 +150,19 @@ Apply complete! Resources: 9 added, 0 changed, 0 destroyed.
 Sembilan resource berhasil dibuat di AWS.
 
 [Masukkan screenshot terraform apply]
+![alt text](<terraform apply.png>)
 
-Press enter or click to view image in full size
-
-Press enter or click to view image in full size
-
-Step 7 — Verifikasi AWS Infrastructure
-Setelah deployment, EC2 diperiksa menggunakan AWS CLI.
-
-Perintah yang digunakan:
-
-aws ec2 describe-instances \
-  --instance-ids i-06ae3b3bfda36d2d5 \
-  --query 'Reservations[0].Instances[0].[InstanceId,State.Name,InstanceType,PublicIpAddress,PrivateIpAddress,SubnetId,VpcId]' \
-  --output table
-Hasil verifikasi menunjukkan:
-
-ParameterHasilInstance IDi-06ae3b3bfda36d2d5Instance StaterunningInstance Typet3.microPublic IP98.86.170.152Private IP10.0.1.110Regionus-east-1
 
 EC2 berhasil mencapai status running setelah proses provisioning.
 
-Press enter or click to view image in full size
-
-Press enter or click to view image in full size
-
 [Masukkan screenshot AWS EC2 Console]
+![alt text](<aws cconsole.png>)
 
 Step 8 — SSH Access ke EC2
 Bagian ini digunakan untuk memverifikasi akses administratif ke EC2 menggunakan SSH Key Pair.
 
 [Masukkan screenshot koneksi SSH yang berhasil setelah pengujian]
-
-Press enter or click to view image in full size
-
-Press enter or click to view image in full size
+![alt text](<ssh aws.png>)
 
 Step 9 — Terraform State Management
 Terraform State digunakan untuk menyimpan pemetaan antara konfigurasi Terraform dan resource AWS yang dikelola.
@@ -212,11 +174,7 @@ Remote State menggunakan AWS S3 belum diterapkan dalam implementasi ini.
 Pemeriksaan resource yang dikelola Terraform dilakukan menggunakan:
 
 terraform state list
-[Masukkan screenshot terraform state list]
-
-Press enter or click to view image in full size
-
-Press enter or click to view image in full size
+![alt text](<terraform sstate list.png>)
 
 Kesimpulan
 Project ini berhasil mengimplementasikan Infrastructure as Code menggunakan Terraform untuk membangun infrastruktur AWS.
